@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="#springUrl('/bootstrap2.3.2/css/bootstrap.min.css')" rel="stylesheet" />
+    <title></title>
+    <link href="#springUrl('/styles/Common.css')" rel="stylesheet" />
+    <link href="#springUrl('/styles/Index.css')" rel="stylesheet" />
+</head>
+<body>
+<!-- 头部 -->
+    <div class="header">
+		#parse("header.vm") 
+    </div>
+<!-- 位置 -->
+    <div class="nav">
+        <ul class="breadcrumb">
+            <li>
+                <img src="#springUrl('/images/32/5025_networking.png')" />
+            </li>
+            <li><a href="#">首页</a> <span class="divider">>></span></li>
+            <li class="active"></li>
+        </ul>
+    </div>
+
+    <div class="container-fluid content">
+        <div class="row-fluid">
+<!-- 左导航栏 -->
+			#parse("leftMenu.vm")
+            <div class="span10 content-right">
+<!-- 主体 -->
+			$screen_content
+                <!-- <iframe src="Index2.html" class="iframe"></iframe> -->
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="foot"></div>
+    <script src="#springUrl('/scripts/jquery-1.9.1.min.js')"></script>
+    <script src="#springUrl('/bootstrap2.3.2/js/bootstrap.min.js')"></script>
+    <script src="#springUrl('/scripts/Index.js')"></script>
+	<div style="text-align:center;">
+<p>来源:<a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
+</div>
+
+</body>
+</html>

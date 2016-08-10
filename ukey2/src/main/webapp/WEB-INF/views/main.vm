@@ -1,0 +1,5 @@
+测试2
+#foreach($user in $userList)
+$!{user.id}
+$!{user.username}
+#end
