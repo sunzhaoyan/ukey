@@ -29,10 +29,10 @@
 					class="txt_input txt_input2"
 					onfocus="if (value ==&#39;Your name&#39;){value =&#39;&#39;}"
 					onblur="if (value ==&#39;&#39;){value=&#39;Your name&#39;}"
-					value="Your name">
+					value="Your name" name="j_username">
 				</label>
 				<h2>PASSWORD</h2>
-				<label> <input type="password" name="textfield2"
+				<label> <input type="password" name="j_password"
 					id="j_password" class="txt_input"
 					onfocus="if (value ==&#39;******&#39;){value =&#39;&#39;}"
 					onblur="if (value ==&#39;&#39;){value=&#39;******&#39;}"

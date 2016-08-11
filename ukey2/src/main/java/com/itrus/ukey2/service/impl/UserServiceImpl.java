@@ -35,4 +35,13 @@ public class UserServiceImpl implements UserService {
 		return userList;
 	}
 
+	@Override
+	public User findUserByExample(UserExample userExample) throws Exception {
+		List<User> users = userMapper.selectByExample(userExample);
+		if (users != null && users.size() > 0) {
+			return users.get(0);
+		}
+		return new User();
+	}
+
 }

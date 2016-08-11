@@ -4,49 +4,58 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
+import com.itrus.ukey2.po.UserExample;
+import com.itrus.ukey2.po.UserExample.Criteria;
+import com.itrus.ukey2.service.UserService;
+
+@SuppressWarnings("deprecation")
+@Service
 public class UserCheckService implements UserDetailsService {
-	private String j_username;
-	private String j_password;
 
+	@Autowired
+	UserService userService;
+//	@Autowired
+//	PasswordEncoder passwordEncoder;
+	
 	private UserCheckService() {
 		System.out.println("UserCheckService instance");
 	}
 
-	@SuppressWarnings("deprecation")
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		System.out.println("UserDetails.loadUserByUsername");
-		System.out.println(j_username + "," + j_password);
-		UserDetails user = null;
+		UserDetails userDetails = null;
+		if (!StringUtils.isBlank(username) && "szy".equals(username)) {
+		UserExample userExample = new UserExample();
+		Criteria criteria = userExample.or();
+		criteria.andUserNameEqualTo(username);
+		com.itrus.ukey2.po.User user = null;
+		try {
+			user = userService.findUserByExample(userExample);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String password = "";
+		if (user != null) {
+			password = user.getPassword();
+//			password = passwordEncoder.encodePassword(password, username);
+		}
 		List<GrantedAuthority> roleList = new ArrayList<GrantedAuthority>();
-		if (!StringUtils.isBlank(j_username) && "szy".equals(j_username)) {
-			roleList.add(new GrantedAuthorityImpl("ROLE_ADMIN"));
-			user = new User(j_username, j_password, true, true, true, true, roleList);
+			roleList.add(new GrantedAuthorityImpl("ROLE_USER"));
+			userDetails = new User(username, password, true, true, true, true, roleList);
 		}
 
-		return user;
+		return userDetails;
 	}
 
-	public String getJ_username() {
-		return j_username;
-	}
-
-	public void setJ_username(String j_username) {
-		this.j_username = j_username;
-	}
-
-	public String getJ_password() {
-		return j_password;
-	}
-
-	public void setJ_password(String j_password) {
-		this.j_password = j_password;
-	}
 
 }
