@@ -29,8 +29,10 @@
 
 	<mvc:default-servlet-handler />
 	
-	<context:component-scan base-package="com.itrus.ukey2.controller" />
-
+	<context:component-scan base-package="com.itrus.ukey2" />
+	
+	<mvc:resources location="/, /WEB-INF/web-resources/"
+		mapping="/resources/**" />
 	<!-- jsp视图解析器 -->
 	<!-- <bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

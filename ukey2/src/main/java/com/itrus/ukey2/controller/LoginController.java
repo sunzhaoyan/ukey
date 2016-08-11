@@ -25,6 +25,6 @@ public class LoginController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "main";
+		return "login";
 	}
 }

@@ -1,30 +1,31 @@
+#set($layout="layouts/nolayout.vm")
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>Wopop</title>
-<link href="#springUrl('/style/style_log.css')" rel="stylesheet"
+<link href="#springUrl('/')resources/style/style_log.css" rel="stylesheet"
 	type="text/css">
-<link rel="stylesheet" type="text/css" href="#springUrl('/style/style.css')">
+<link rel="stylesheet" type="text/css" href="#springUrl('/')resources/style/style.css">
 <link rel="stylesheet" type="text/css"
-	href="#springUrl('/style/userpanel.css')">
+	href="#springUrl('/')resources/style/userpanel.css">
 <link rel="stylesheet" type="text/css"
-	href="#springUrl('/style/jquery.ui.all.css')">
+	href="#springUrl('/')resources/style/jquery.ui.all.css">
 
 </head>
 
 <body class="login">
 	<div class="login_m">
 		<div class="login_logo">
-			<img src="#springUrl('/images/logo_login.png')" width="196" height="46">
+			<img src="#springUrl('/')resources/images/logo_login.png" width="196" height="46">
 		</div>
 		<div class="login_boder">
 
 			<div class="login_padding" id="login_model">
-
+				<form action="j_spring_security_check" method="post">
 				<h2>USERNAME</h2>
-				<label> <input type="text" id="username"
+				<label> <input type="text" id="j_username"
 					class="txt_input txt_input2"
 					onfocus="if (value ==&#39;Your name&#39;){value =&#39;&#39;}"
 					onblur="if (value ==&#39;&#39;){value=&#39;Your name&#39;}"
@@ -32,7 +33,7 @@
 				</label>
 				<h2>PASSWORD</h2>
 				<label> <input type="password" name="textfield2"
-					id="userpwd" class="txt_input"
+					id="j_password" class="txt_input"
 					onfocus="if (value ==&#39;******&#39;){value =&#39;&#39;}"
 					onblur="if (value ==&#39;&#39;){value=&#39;******&#39;}"
 					value="******">
@@ -42,7 +43,7 @@
 
 
 				<p class="forgot">
-					<a id="iforget" href="javascript:void(0);">Forgot your
+					<a id="iforget" href="javascript:void(0);">Forgot your2
 						password?</a>
 				</p>
 				<div class="rem_sub">
@@ -50,10 +51,12 @@
 						<input type="checkbox" name="checkbox" id="save_me"> <label
 							for="checkbox">Remember me</label>
 					</div>
+					
 					<label> <input type="submit" class="sub_button"
 						name="button" id="button" value="SIGN-IN" style="opacity: 0.7;">
 					</label>
 				</div>
+				</form>
 			</div>
 
 			<div class="copyrights">
