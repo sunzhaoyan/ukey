@@ -15,6 +15,7 @@
 
 		<form-login login-page="/login" login-processing-url="/j_spring_security_check"
 			authentication-failure-url="/login?login_error=t"
+			default-target-url="/index"
 			authentication-success-handler-ref="loginSuccess"
 			authentication-failure-handler-ref="loginFailure" />
 		<logout logout-url="/j_spring_security_logout"
@@ -23,6 +24,7 @@
 		<intercept-url pattern="/userCenter/**"
 			access="hasAnyRole('ROLE_SUPPER','ROLE_PROJECTS')" />
 		<intercept-url pattern="/**" access="permitAll" />
+		<intercept-url pattern="/index" access="permitAll" />
 
 		<session-management invalid-session-url="/login"
 			session-fixation-protection="newSession" />

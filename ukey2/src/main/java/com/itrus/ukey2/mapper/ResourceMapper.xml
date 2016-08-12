@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itrus.ukey2.mapper.ResourceMapper" >
+  <resultMap id="BaseResultMap" type="com.itrus.ukey2.po.Resource" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="parent_res_code" property="parentResCode" jdbcType="VARCHAR" />
+    <result column="res_code" property="resCode" jdbcType="VARCHAR" />
+    <result column="res_role_name" property="resRoleName" jdbcType="VARCHAR" />
+    <result column="res_title" property="resTitle" jdbcType="VARCHAR" />
+    <result column="res_url" property="resUrl" jdbcType="VARCHAR" />
+    <result column="res_order" property="resOrder" jdbcType="BIGINT" />
+    <result column="res_status" property="resStatus" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, parent_res_code, res_code, res_role_name, res_title, res_url, res_order, res_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.itrus.ukey2.po.ResourceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_resource
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_resource
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_resource
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itrus.ukey2.po.ResourceExample" >
+    delete from t_resource
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.itrus.ukey2.po.Resource" >
+    insert into t_resource (id, parent_res_code, res_code, 
+      res_role_name, res_title, res_url, 
+      res_order, res_status)
+    values (#{id,jdbcType=BIGINT}, #{parentResCode,jdbcType=VARCHAR}, #{resCode,jdbcType=VARCHAR}, 
+      #{resRoleName,jdbcType=VARCHAR}, #{resTitle,jdbcType=VARCHAR}, #{resUrl,jdbcType=VARCHAR}, 
+      #{resOrder,jdbcType=BIGINT}, #{resStatus,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.itrus.ukey2.po.Resource" >
+    insert into t_resource
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="parentResCode != null" >
+        parent_res_code,
+      </if>
+      <if test="resCode != null" >
+        res_code,
+      </if>
+      <if test="resRoleName != null" >
+        res_role_name,
+      </if>
+      <if test="resTitle != null" >
+        res_title,
+      </if>
+      <if test="resUrl != null" >
+        res_url,
+      </if>
+      <if test="resOrder != null" >
+        res_order,
+      </if>
+      <if test="resStatus != null" >
+        res_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="parentResCode != null" >
+        #{parentResCode,jdbcType=VARCHAR},
+      </if>
+      <if test="resCode != null" >
+        #{resCode,jdbcType=VARCHAR},
+      </if>
+      <if test="resRoleName != null" >
+        #{resRoleName,jdbcType=VARCHAR},
+      </if>
+      <if test="resTitle != null" >
+        #{resTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="resUrl != null" >
+        #{resUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="resOrder != null" >
+        #{resOrder,jdbcType=BIGINT},
+      </if>
+      <if test="resStatus != null" >
+        #{resStatus,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itrus.ukey2.po.ResourceExample" resultType="java.lang.Integer" >
+    select count(*) from t_resource
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_resource
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.parentResCode != null" >
+        parent_res_code = #{record.parentResCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resCode != null" >
+        res_code = #{record.resCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resRoleName != null" >
+        res_role_name = #{record.resRoleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resTitle != null" >
+        res_title = #{record.resTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resUrl != null" >
+        res_url = #{record.resUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resOrder != null" >
+        res_order = #{record.resOrder,jdbcType=BIGINT},
+      </if>
+      <if test="record.resStatus != null" >
+        res_status = #{record.resStatus,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_resource
+    set id = #{record.id,jdbcType=BIGINT},
+      parent_res_code = #{record.parentResCode,jdbcType=VARCHAR},
+      res_code = #{record.resCode,jdbcType=VARCHAR},
+      res_role_name = #{record.resRoleName,jdbcType=VARCHAR},
+      res_title = #{record.resTitle,jdbcType=VARCHAR},
+      res_url = #{record.resUrl,jdbcType=VARCHAR},
+      res_order = #{record.resOrder,jdbcType=BIGINT},
+      res_status = #{record.resStatus,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itrus.ukey2.po.Resource" >
+    update t_resource
+    <set >
+      <if test="parentResCode != null" >
+        parent_res_code = #{parentResCode,jdbcType=VARCHAR},
+      </if>
+      <if test="resCode != null" >
+        res_code = #{resCode,jdbcType=VARCHAR},
+      </if>
+      <if test="resRoleName != null" >
+        res_role_name = #{resRoleName,jdbcType=VARCHAR},
+      </if>
+      <if test="resTitle != null" >
+        res_title = #{resTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="resUrl != null" >
+        res_url = #{resUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="resOrder != null" >
+        res_order = #{resOrder,jdbcType=BIGINT},
+      </if>
+      <if test="resStatus != null" >
+        res_status = #{resStatus,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itrus.ukey2.po.Resource" >
+    update t_resource
+    set parent_res_code = #{parentResCode,jdbcType=VARCHAR},
+      res_code = #{resCode,jdbcType=VARCHAR},
+      res_role_name = #{resRoleName,jdbcType=VARCHAR},
+      res_title = #{resTitle,jdbcType=VARCHAR},
+      res_url = #{resUrl,jdbcType=VARCHAR},
+      res_order = #{resOrder,jdbcType=BIGINT},
+      res_status = #{resStatus,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="findResourceByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	SELECT a.parent_res_code, a.res_code, a.res_url, a.res_role_name, a.res_title
+		FROM t_resource a
+	LEFT JOIN t_auth b
+		ON a.res_code = b.res_code
+	LEFT JOIN t_admin c
+		ON b.role_code = c.role_code
+	WHERE c.user_name = #{_parameter}
+  </select>
+</mapper>

@@ -26,5 +26,6 @@
 	<bean id="financeService" class="com.szy.ff.service.impl.FinanceServiceImpl"></bean> -->
 	
 	<bean id="userService" class="com.itrus.ukey2.service.impl.UserServiceImpl"></bean>
+	<bean id="resourceService" class="com.itrus.ukey2.service.impl.ResourceServiceImpl"></bean>
 	
 </beans>
