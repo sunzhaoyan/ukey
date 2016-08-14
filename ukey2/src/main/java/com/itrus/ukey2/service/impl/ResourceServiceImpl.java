@@ -19,20 +19,18 @@ public class ResourceServiceImpl implements ResourceService {
 	@Autowired
 	ResourceMapper resourceMapper;
 	@Override
-	public List<Resource> findResourceByUserName(String username) throws Exception {
+	public Map<String, List<Resource>> findResourceByUserName(String username) throws Exception {
 		List<Resource> childRes = resourceMapper.findResourceByUserName(username);
-		List<Resource> parRes = new ArrayList<Resource>();
-		ResourceExample example = new ResourceExample();
-		ResourceExample.Criteria criteria = example.or();
-		Map<String, Integer> parMap = new HashMap<String, Integer>();
-		List<String> list = new ArrayList<String>();
+		List<Resource> parentRes = new ArrayList<Resource>();
+		List<String> parentCode = new ArrayList<String>();
 		for (Resource res : childRes) {
-			if(!parMap.containsKey(res.getParentResCode())){
-				list.add(res.getParentResCode());
-			}
+			parentCode.add(res.getParentResCode());
 		}
-		parRes = resourceMapper.selectByBatchParentResCode(list);
-		return parRes;
+		parentRes = resourceMapper.selectByBatchParentResCode(parentCode);
+		Map<String, List<Resource>> retMap = new HashMap<String, List<Resource>>();
+		retMap.put("parent", parentRes);
+		retMap.put("child", childRes);
+		return retMap;
 	}
 
 }

@@ -1,6 +1,11 @@
 package com.itrus.ukey2.po;
 
-public class User {
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+public class User{
     private Long id;
 
     private String userName;
@@ -90,4 +95,5 @@ public class User {
     public void setAddress(String address) {
         this.address = address == null ? null : address.trim();
     }
+
 }

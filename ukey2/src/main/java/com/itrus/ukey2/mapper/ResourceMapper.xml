@@ -265,4 +265,13 @@
 		ON b.role_code = c.role_code
 	WHERE c.user_name = #{_parameter}
   </select>
+  
+  <select id="selectByBatchParentResCode" resultMap="BaseResultMap">  
+ 	Select  * from t_resource
+ 	where res_code in 
+ 	<foreach item="item" index="index" collection="list" open="(" separator="," close=")">  
+  		#{item}
+ 	</foreach> 
+ 	order by res_order
+</select> 
 </mapper>
