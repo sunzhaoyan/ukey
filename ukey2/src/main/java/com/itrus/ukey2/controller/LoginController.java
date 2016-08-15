@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -43,12 +45,14 @@ public class LoginController {
 	}
 	
 	@RequestMapping("/index")
-	public String returnIndex(Model model) {
+	public String returnIndex(Model model, HttpServletRequest request) {
 		SecurityContext securityContext = SecurityContextHolder.getContext();
 		Object principal  = securityContext.getAuthentication().getPrincipal();
 		User user = null;
 		if(principal instanceof User) {
 			user = (User)principal;
+		} else {
+			return "/";
 		}
 		String username = user.getUsername();
 		Map<String, List<Resource>> res = new HashMap<String, List<Resource>>();
@@ -61,8 +65,8 @@ public class LoginController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		model.addAttribute("parentRes", parentRes);
-		model.addAttribute("childRes", childRes);
+		request.setAttribute("parentRes", parentRes);
+		request.setAttribute("childRes", childRes);
 		return "main";
 	}
 }
